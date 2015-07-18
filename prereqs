@@ -1,0 +1,2 @@
+get latest vagrant: http://www.vagrantup.com/downloads.html
+sudo apt-get install virtualbox
