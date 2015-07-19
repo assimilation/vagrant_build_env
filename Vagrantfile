@@ -60,7 +60,18 @@ Vagrant.configure(2) do |config|
       end
 
       if opts[:name].eql? "jenkinsci"
+
 	config.vm.network :forwarded_port, guest: 8080, host: 9090
+
+	#bug workaround https://github.com/mitchellh/vagrant/issues/5973
+	#config.vm.synced_folder "salt/roots/", "/srv/salt/"
+	#  config.vm.provision :salt do |salt|
+	#    salt.minion_config = "salt/minion"
+	#    salt.run_highstate = true
+	#  end
+	#end
+	config.vm.provision "shell", path: "install_salt_minion.sh"
+	  
       end
 
       config.vm.network :private_network, ip: opts[:eth1]
