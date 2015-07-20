@@ -64,13 +64,15 @@ Vagrant.configure(2) do |config|
 	config.vm.network :forwarded_port, guest: 8080, host: 9090
 
 	#bug workaround https://github.com/mitchellh/vagrant/issues/5973
-	#config.vm.synced_folder "salt/roots/", "/srv/salt/"
 	#  config.vm.provision :salt do |salt|
 	#    salt.minion_config = "salt/minion"
 	#    salt.run_highstate = true
 	#  end
 	#end
 	config.vm.provision "shell", path: "install_salt_minion.sh"
+	config.vm.provision "shell", path: "install_brightbox_ruby.sh"
+	config.vm.provision "shell", path: "install_jenkins_api_client.sh"
+	config.vm.synced_folder "salt/roots/", "/srv/salt/"
 	  
       end
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Setup saltstack PPA"
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get install software-properties-common python-software-properties -y >> /dev/null
 sudo add-apt-repository ppa:saltstack/salt -y >> /dev/null
 sudo apt-get update >> /dev/null
