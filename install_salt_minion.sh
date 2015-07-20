@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 echo "Setup saltstack PPA"
+
+#fixes dpkg-reconfigure: unable to re-open stdin: No file or directory
 export DEBIAN_FRONTEND=noninteractive
+
 sudo apt-get install software-properties-common python-software-properties -y >> /dev/null
 sudo add-apt-repository ppa:saltstack/salt -y >> /dev/null
 sudo apt-get update >> /dev/null

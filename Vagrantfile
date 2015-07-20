@@ -63,12 +63,19 @@ Vagrant.configure(2) do |config|
 
 	config.vm.network :forwarded_port, guest: 8080, host: 9090
 
+	#fixes stdin: is not a tty
+	config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
 	#bug workaround https://github.com/mitchellh/vagrant/issues/5973
 	#  config.vm.provision :salt do |salt|
 	#    salt.minion_config = "salt/minion"
 	#    salt.run_highstate = true
 	#  end
 	#end
+
+	#fixes GPG error: http://get.docker.io docker Release: The following signatures...
+	config.vm.provision "shell", path: "remove_docker_list.sh"
+
 	config.vm.provision "shell", path: "install_salt_minion.sh"
 	config.vm.provision "shell", path: "install_brightbox_ruby.sh"
 	config.vm.provision "shell", path: "install_jenkins_api_client.sh"
